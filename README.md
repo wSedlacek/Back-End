@@ -73,6 +73,7 @@ https://essentialism-frontend.vercel.app/
 - bcryptjs
 - commitizen
 - cors
+- cross-env
 - express
 - helmet
 - jest 
