@@ -1,8 +1,13 @@
-const router = require("express").Router();
+const express = require("express");
+const router = express.Router();
+
+// const router = require("express").Router();
 const bcrypt = require("bcryptjs");
-const { authenticate } = require("../middleware/auth-middleware");
+// const { authenticate } = require("../middleware/auth-middleware");
 
 const Users = require("../models/users-model");
+
+
 
 // const jwt = require('jsonwebtoken')
 
@@ -21,7 +26,7 @@ router.post("/register", async (req, res, next) => {
 
     // moved to helper function bcrypt function
     // const newUser = await Users.add({
-    //   username,
+    //   username, 
     //   // has with time complexity of 10
     //   password: await bcrypt.hash(password, 14),
     //   // instead of putting directly, give hash value by import bcrypt js (step 1)
@@ -58,7 +63,7 @@ router.post("/login", async (req, res, next) => {
   }
 });
 
-router.get("/users", authenticate(), async (req, res, next) => {
+router.get("/users", async (req, res, next) => {
   try {
     res.json(await Users.find());
   } catch (err) {
@@ -66,7 +71,7 @@ router.get("/users", authenticate(), async (req, res, next) => {
   }
 });
 
-router.get("/users/:id", authenticate(), async (req, res, next) => {
+router.get("/users/:id", async (req, res, next) => {
   try {
     const user = await Users.findById(req.params.id); // if not account, send 404, otherwise send 200
     if (!user) {
@@ -82,7 +87,7 @@ router.get("/users/:id", authenticate(), async (req, res, next) => {
   }
 });
 
-router.get("/users/:id/tutorials", authenticate(), async (req, res, next) => {
+router.get("/users/:id/tutorials", async (req, res, next) => {
   try {
     const savedTutorials = await Users.findAllSavedTutorials(req.params.id); // if not account, send 404, otherwise send 200
     if (!savedTutorials) {
@@ -105,8 +110,7 @@ router.get("/users/:id/tutorials", authenticate(), async (req, res, next) => {
 
 router.get(
   "/users/:id/tutorials/:id",
-  authenticate(),
-  async (req, res, next) => {
+    async (req, res, next) => {
     try {
       const savedTutorial = await Users.findSavedTutorialById(req.params.id); // if not account, send 404, otherwise send 200
       if (!savedTutorial) {
@@ -134,7 +138,7 @@ router.get(
 // edit and delete for the tutorial themselves should only be accessed by creators, you can only delete saved tutorials
 
 
-router.delete("/users/:id", authenticate(), async (req, res, next) => {
+router.delete("/users/:id", async (req, res, next) => {
   try {
     await Users.remove(req.params.id);
 
@@ -148,7 +152,7 @@ router.delete("/users/:id", authenticate(), async (req, res, next) => {
   }
 });
 
-router.delete("/users/:id/tutorials/:id", authenticate(), async (req, res, next) => {
+router.delete("/users/:id/tutorials/:id", async (req, res, next) => {
     try {
         const savedTutorials = await Users.findAllSavedTutorials(req.params.id); 
         await savedTutorials.removeSavedTutorialbyId(req.params.id);
@@ -173,7 +177,7 @@ function generateToken(user) {
   return jwt.sign(payload, process.env.JWT_SECRET);
 }
 
-router.get("/logout", authenticate(), async (req, res, next) => {
+router.get("/logout", async (req, res, next) => {
   // req.session.destroy(err => {
   // 	if (err) {
   // 		next(err);
