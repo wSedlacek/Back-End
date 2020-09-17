@@ -22,53 +22,51 @@ exports.up = async function (knex) {
       
    await knex.schema
       .createTable("saved_user_tutorials", (tbl) => {
-          tbl.increments("id");
           tbl.boolean("savedTutorial").notNull().defaultTo(false);
       
           tbl.integer("user_id")
           .references("id")
-              .unsigned()
-              .notNull()
-                .inTable("users")
+          .inTable("users")
+                .unsigned()
+                .notNull()
                 .onUpdate("CASCADE")
                 .onDelete("CASCADE");
 
           tbl.integer("tutorial_id")
           .references("id")
-              .unsigned()
-              .notNull()
-                .inTable("tutorials")
-                .onUpdate("CASCADE")
+              
+          .inTable("tutorials")
+          .onUpdate("CASCADE")
+                .notNull()
+                .unsigned()
                 .onDelete("CASCADE");
 
           tbl.primary(['user_id','tutorial_id'])
-    });
+    }); 
 
     await knex.schema   
         .createTable("creator_tutorials", (tbl) => {
-            tbl.increments("id");
+            tbl.primary(['creator_id','c_tutorial_id'])
             tbl.boolean("createdTutorial").notNull().defaultTo(false);
         
             tbl.integer("creator_id")
             .references("id")
-                .unsigned()
-                .notNull()
                   .inTable("creators")
                   .onUpdate("CASCADE")
-                  .onDelete("CASCADE");
+                  .onDelete("CASCADE")
+                  .unsigned()
+                  .notNull();
   
             tbl.integer("c_tutorial_id")
             .references("id")
-                .unsigned()
-                .notNull()
-                  .inTable("tutorials")
+            .inTable("tutorials")
+                  .unsigned()
+                  .notNull()
                   .onUpdate("CASCADE")
                   .onDelete("CASCADE");
   
-            tbl.primary(['creator_id','c_tutorial_id'])
     });
  };
-  ​
   exports.down = async function(knex) {
     await knex.schema.dropTableIfExists("creator_tutorials");
     await knex.schema.dropTableIfExists("saved_user_tutorials");
