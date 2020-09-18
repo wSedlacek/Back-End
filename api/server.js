@@ -16,7 +16,7 @@ server.use(cors());
 server.use(express.json());
 server.use(cookieParser());
 
-server.use('https://how-to-app-backend-api.herokuapp.com/api', usersRouter);  
+server.use('/api', usersRouter);  
 // server.use('/api/creators', creatorsRouter); 
 // server.use('/api/tutorials', tutorialsRouter);  
 
