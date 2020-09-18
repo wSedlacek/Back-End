@@ -1,8 +1,7 @@
+const knexCleaner = require('knex-cleaner');
+
 exports.seed = async function(knex) {
-  await knex("users").truncate()
-  await knex("creators").truncate()
-  await knex("tutorials").truncate()
-  await knex("saved_user_tutorials").truncate()
+  await knexCleaner.clean(knex);
 }
 
 // use knex clean-up library instead
