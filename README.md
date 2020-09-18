@@ -2,7 +2,7 @@
 
 > The Way of the Essentialist involves doing less, but better, so you can make the highest possible contribution. It’s not about getting more done in less time or getting less done. It’s about getting only the right things done. It’s about regaining control of our own choices about where to spend our time and energy instead of giving others implicit permission to choose for us. The first step to essentialism is identifying your values.
 
-https://essentialism-frontend.vercel.app/
+https://how-to-app-backend-api.herokuapp.com/
 
 ## Table Of Contents
 
