@@ -38,7 +38,7 @@ exports.seed = async function (knex, Promise) {
       materials: "internet and computer",
       directions: "work hard as a group to finish",
       is_saved: true,
-      likes: false,
+      likes: 12,
       creator_id: 1
     },
     {
@@ -47,7 +47,7 @@ exports.seed = async function (knex, Promise) {
       materials: "internet and computer",
       directions: "Step 1. Move on to step 2. Step 2. Finish.",
       is_saved: false,
-      likes: true,
+      likes: 123,
       creator_id: 2
     },
   ]);
