@@ -62,3 +62,5 @@ router.post("/register", async (req, res, next) => {
       }
       return jwt.sign(payload, process.env.JWT_SECRET)
     }
+
+    module.exports = router;

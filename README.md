@@ -83,6 +83,7 @@ https://how-to-app-backend-api.herokuapp.com/
 - knex
 - knex-cleaner
 - nodemon
+- pg (postgres via Heroku)
 - sqlite3
 - supertest
 
