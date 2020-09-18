@@ -34,14 +34,13 @@ router.post("/register", async (req, res, next) => {
       if (!user) {
         return res.status(401).json(authErr);
       }
-  
+      
       // compares plain text pw from req body to the hash stored in the db, returns true/false
       const passwordValid = await bcrypt.compare(password, user.password);
       if (!passwordValid) {
         return res.status(401).json(authErr);
       }
   
-      // jwt
       // generate a new JSON web token
       const token = generateToken(user)
       res.cookie('token', token)
@@ -62,5 +61,17 @@ router.post("/register", async (req, res, next) => {
       }
       return jwt.sign(payload, process.env.JWT_SECRET)
     }
+
+  router.get("/logout", async (req, res, next) => {
+    req.session.destroy(err => {
+    	if (err) {
+    		next(err);
+    	} else {
+    		res.json({
+    			message: "Successfully logged out!"
+    		});
+    	}
+    });
+  });
 
     module.exports = router;
