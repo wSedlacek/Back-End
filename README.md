@@ -2,8 +2,6 @@
 
 > Innovate, admire, and explore the plethora of information people love to use, create, and share. This collection of how-to's is more than just your simplified tutorial library, it's your go-to, easy-to-use companion for all your all your projects and life needs. Stripped down to the tools you need and steps you take. Enjoy! 
 
-https://how-to.vercel.app/
-
 https://how-to-app-backend-api.herokuapp.com/
 
 ## Table Of Contents
