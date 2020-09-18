@@ -3,11 +3,9 @@ const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
 
-
-const authenticate = require('../middleware/auth-middleware.js');
 const usersRouter = require('../routers/users-router');
-const creatorsRouter = require('../routers/creators-router');
-const tutorialsRouter = require('../routers/tutorials-router')
+// const creatorsRouter = require('../routers/creators-router');
+// const tutorialsRouter = require('../routers/tutorials-router')
 
 
 const server = express();
@@ -16,9 +14,9 @@ server.use(helmet());
 server.use(cors());
 server.use(express.json());
 
-server.use('/api/users', usersRouter);
-server.use('/api/creators', authenticate, creatorsRouter);
-server.use('/api/tutorials', authenticate, tutorialsRouter);
+server.use('/api/users', usersRouter);  
+// server.use('/api/creators', creatorsRouter); 
+// server.use('/api/tutorials', tutorialsRouter);  
 
 
 server.get("/", (req, res) => {

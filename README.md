@@ -74,6 +74,7 @@ https://how-to.vercel.app/
 - bcryptjs
 - commitizen
 - cors
+- cross-env
 - express
 - helmet
 - jest 
