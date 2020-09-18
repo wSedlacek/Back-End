@@ -1,9 +1,7 @@
 require("dotenv").config(); // for reading JWT_SECRET from .env file
-
 const express = require("express");
 const router = express.Router();
-// const authenticate = require("../middleware/auth-middleware");
-
+// const authenticate = require("../middleware/git auth-middleware");
 const Users = require("../models/users-model");
 
 
