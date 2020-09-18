@@ -8,8 +8,8 @@ exports.seed = async function (knex, Promise) {
       directions: "work hard as a group to finish",
       likes: 123,
       is_saved: true,
-      user_id: 1,
-      tutorial_id: 1
+      user_id: 1, // references id in user table
+      tutorial_id: 1 // references id in tutorial table
     },
   ]);
 };
