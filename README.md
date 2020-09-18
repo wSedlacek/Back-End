@@ -78,6 +78,7 @@ https://how-to-app-backend-api.herokuapp.com/
 - express
 - express session
 - helmet
+- heroku
 - jest 
 - jsonwebtoken
 - knex
