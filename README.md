@@ -4,6 +4,7 @@
 
 https://how-to.vercel.app/
 
+https://how-to-app-backend-api.herokuapp.com/
 
 ## Table Of Contents
 
@@ -73,6 +74,7 @@ https://how-to.vercel.app/
 - axios
 - bcryptjs
 - commitizen
+- cookie-parser
 - cors
 - cross-env
 - express
