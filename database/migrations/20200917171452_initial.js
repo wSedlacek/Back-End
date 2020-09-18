@@ -18,7 +18,7 @@ exports.up = async function (knex) {
           tbl.text("title").notNull();
           tbl.text("materials").notNull();
           tbl.text("directions").notNull();
-          tbl.boolean("likes");
+          tbl.integer("likes");
           tbl.boolean("is_saved");
 
           tbl.integer("creator_id")
@@ -36,7 +36,7 @@ exports.up = async function (knex) {
         tbl.text("title").notNull();
         tbl.text("materials").notNull();
         tbl.text("directions").notNull();
-        tbl.boolean("likes");
+        tbl.integer("likes");
         tbl.boolean("is_saved").notNull().defaultTo(false);
       
           tbl.integer("user_id")
