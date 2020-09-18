@@ -5,7 +5,7 @@ const helmet = require('helmet');
 
 const usersRouter = require('../routers/users-router');
 // const creatorsRouter = require('../routers/creators-router');
-// const tutorialsRouter = require('../routers/tutorials-router')
+// const tutorialsRouter = require('../routers/tutorials-router');
 
 
 const server = express();
@@ -14,7 +14,7 @@ server.use(helmet());
 server.use(cors());
 server.use(express.json());
 
-server.use('/api/users', usersRouter);  
+server.use('/api', usersRouter);  
 // server.use('/api/creators', creatorsRouter); 
 // server.use('/api/tutorials', tutorialsRouter);  
 
