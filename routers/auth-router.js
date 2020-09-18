@@ -63,4 +63,16 @@ router.post("/register", async (req, res, next) => {
       return jwt.sign(payload, process.env.JWT_SECRET)
     }
 
+  // router.get("/logout", async (req, res, next) => {
+  //   req.session.destroy(err => {
+  //   	if (err) {
+  //   		next(err);
+  //   	} else {
+  //   		res.json({
+  //   			message: "Successfully logged out!"
+  //   		});
+  //   	}
+  //   });
+  // });
+
     module.exports = router;
