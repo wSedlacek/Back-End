@@ -71,14 +71,15 @@ router.post("/login", async (req, res, next) => {
     next(err);
   }
 });
-// function generateToken(user) {
-//     const payload = {
-//       subject: user.id,
-//       username: user.username,
-//     };
-  
-//     return jwt.sign(payload, process.env.JWT_SECRET);
-//   }
+
+function generateToken(user) {
+    const payload = {
+    //   id: user.id,
+      username: user.username,
+      password: user.password
+    }
+    return jwt.sign(payload, process.env.JWT_SECRET)
+  }
 
 router.get("/users", async (req, res, next) => {
   try {
@@ -183,16 +184,7 @@ router.delete("/users/:id/tutorials/:id", async (req, res, next) => {
   }
 );
 
-function generateToken(user) {
-    const payload = {
-      subject: user.id,
-      username: user.username,
-      password: user.password
-    }
-  
-    return jwt.sign(payload, process.env.JWT_SECRET)
-  }
-  
+ 
 
 
 router.get("/logout", async (req, res, next) => {

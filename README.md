@@ -78,10 +78,12 @@ https://how-to-app-backend-api.herokuapp.com/
 - cors
 - cross-env
 - express
+- express session
 - helmet
 - jest 
 - jsonwebtoken
 - knex
+- knex-cleaner
 - nodemon
 - sqlite3
 - supertest
