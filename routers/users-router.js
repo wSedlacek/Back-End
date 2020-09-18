@@ -3,17 +3,15 @@ require("dotenv").config(); // for reading JWT_SECRET from .env file
 const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcryptjs");
-// const { authenticate } = require("../middleware/auth-middleware");
+const authenticate = require("../middleware/auth-middleware");
 const jwt = require('jsonwebtoken')
 
 const Users = require("../models/users-model");
 
 
-
-
 router.post("/register", async (req, res, next) => {
   try {
-    const { username, password } = req.body;
+    const { username } = req.body;
     const user = await Users.findBy({ username }).first();
 
     if (user) {
@@ -81,7 +79,7 @@ function generateToken(user) {
     return jwt.sign(payload, process.env.JWT_SECRET)
   }
 
-router.get("/users", async (req, res, next) => {
+router.get("/users", authenticate(), async (req, res, next) => {
   try {
     res.json(await Users.find());
   } catch (err) {
