@@ -75,6 +75,7 @@ https://how-to-app-backend-api.herokuapp.com/
 - cookie-parser
 - cors
 - cross-env
+- dotenv (note: will not work with heroku deployments, use var configurations for JWT secrets and environment variables)
 - express
 - express session
 - helmet
@@ -84,7 +85,7 @@ https://how-to-app-backend-api.herokuapp.com/
 - knex
 - knex-cleaner
 - nodemon
-- pg (postgres via Heroku)
+- pg (postgres via Heroku Cli)
 - sqlite3
 - supertest
 
