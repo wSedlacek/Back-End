@@ -72,6 +72,7 @@ https://how-to-app-backend-api.herokuapp.com/
 - axios
 - bcryptjs
 - commitizen
+- cookie-parser
 - cors
 - cross-env
 - express
