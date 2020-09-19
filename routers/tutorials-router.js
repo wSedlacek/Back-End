@@ -16,11 +16,12 @@ router.get("/tutorials", async (req, res, next) => {
 
 router.get("/tutorials/:id", async (req, res, next) => {
   try {
-    const tutorial = await Tutorials.findById(req.params.id); // if not account, send 404, otherwise send 200
+    const {id} = req.params;
+    const tutorial = await Tutorials.findById(id); // if not account, send 404, otherwise send 200
     if (!tutorial) {
       res.status(404).json({ message: "Tutorial could not be found with that ID" });
     } else {
-      res.status(200).json(user);
+      res.status(200).json(tutorial);
     }
   } catch (err) {
     res
