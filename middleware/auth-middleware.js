@@ -17,7 +17,7 @@ const jwt = require("jsonwebtoken")
 
 function authenticate(role) {
 	// use a scale, since admins should still be able to access basic endpoints
-	const roles = ["user", "creator"]
+	// const roles = ["user", "creator"]
 
 	return async (req, res, next) => {
 		const authError = {
@@ -37,12 +37,12 @@ function authenticate(role) {
 					return res.status(401).json(authError)
 				}
 
-				// make sure the user's role is above or the same as the required role
-				if (role && roles.indexOf(decoded.userRole) < roles.indexOf(role)) {
-					return res.status(403).json({
-						message: "You are not allowed to create tutorials",
-					})
-				}
+				// // make sure the user's role is above or the same as the required role
+				// if (role && roles.indexOf(decoded.userRole) < roles.indexOf(role)) {
+				// 	return res.status(403).json({
+				// 		message: "You are not allowed to create tutorials",
+				// 	})
+				// }
 
 				// we know the user is authorized at this point,
 				// make the token's payload available to other middleware functions
