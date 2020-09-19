@@ -32,7 +32,7 @@ exports.up = async function (knex) {
       
    await knex.schema
       .createTable("saved_user_tutorials", (tbl) => {
-        tbl.increments("id");
+        // tbl.increments("id");
         tbl.text("title").notNull();
         tbl.text("materials").notNull();
         tbl.text("directions").notNull();

@@ -46,21 +46,4 @@ router.delete("/tutorials/:id", async (req, res, next) => {
   }
 });
 
-router.delete("/Tutorials/:id/tutorials/:id", async (req, res, next) => {
-    try {
-        const savedTutorials = await Tutorials.findAllSavedTutorials(req.params.id); 
-        await savedTutorials.removeSavedTutorialbyId(req.params.id);
-
-      res.status(204).end();
-    } catch (err) {
-      res
-        .status(500)
-        .json({ message: "Something went wrong, could not delete saved tutorial from your favorite's list using that id" });
-
-      next(err);
-    }
-  }
-);
-
-
 module.exports = router;
