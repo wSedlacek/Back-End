@@ -1,12 +1,12 @@
 require("dotenv").config(); // for reading JWT_SECRET from .env file
 const express = require("express");
 const router = express.Router();
-// const authenticate = require("../middleware/git auth-middleware");
+const authenticate = require("../middleware/auth-middleware");
 const Tutorials = require("../models/tutorials-model");
 
 
 
-router.get("/tutorials", async (req, res, next) => {
+router.get("/tutorials", authenticate(), async (req, res, next) => {
   try {
     res.json(await Tutorials.find());
   } catch (err) {
