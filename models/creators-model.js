@@ -40,29 +40,29 @@ function remove(id) {
 // function findAllSavedTutorials(id) {
 //     return db("creators")
 //         .select("id", "tutorials")
+// // }
+// function findAllSavedTutorials(creator_id) {
+//     return db("saved_creator_tutorials")
+// 		.select("creator_id", "tutorials")
+// 		.where({ creator_id })
 // }
-function findAllSavedTutorials(creator_id) {
-    return db("saved_creator_tutorials")
-		.select("creator_id", "tutorials")
-		.where({ creator_id })
-}
 
-function findSavedTutorialById(creator_id) {
-    return db("creators")
-		.select("id", "tutorials")
-		.where({ creator_id })
-		.first()
-}
+// function findSavedTutorialById(creator_id) {
+//     return db("creators")
+// 		.select("id", "tutorials")
+// 		.where({ creator_id })
+// 		.first()
+// }
 
-// function removeSavedTutorialById(id) {
-// 	return db('creators')
-// 	  .select("id", "tutorials")
-// 	  .where({ id })
-function removeSavedTutorialById(creator_id) {
-	return db("saved_creator_tutorials")
-	  .where({ creator_id })
-	  .del();
-}
+// // function removeSavedTutorialById(id) {
+// // 	return db('creators')
+// // 	  .select("id", "tutorials")
+// // 	  .where({ id })
+// function removeSavedTutorialById(creator_id) {
+// 	return db("saved_creator_tutorials")
+// 	  .where({ creator_id })
+// 	  .del();
+// }
 
 
 module.exports = {
@@ -70,9 +70,9 @@ module.exports = {
 	find,
 	findBy,
 	findById,
-	findAllSavedTutorials,
-	findSavedTutorialById,
+	// findAllSavedTutorials,
+	// findSavedTutorialById,
     update,
 	remove,
-	removeSavedTutorialById
+	// removeSavedTutorialById
 }

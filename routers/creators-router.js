@@ -111,23 +111,23 @@ router.delete("/creators/:id", async (req, res, next) => {
   }
 });
 
-router.delete("/creators/:id/tutorials/:id", async (req, res, next) => {
-    try {
-      // const savedTutorials = await Creators.findAllSavedTutorials(req.params.id); 
-      // await savedTutorials.removeSavedTutorialbyId(req.params.id);
-        const savedTutorials = await Creators.findAllSavedTutorials(req.params.user_id); 
-        await savedTutorials.removeSavedTutorialbyId(req.params.user_id);
+// router.delete("/creators/:id/tutorials/:id", async (req, res, next) => {
+//     try {
+//       // const savedTutorials = await Creators.findAllSavedTutorials(req.params.id); 
+//       // await savedTutorials.removeSavedTutorialbyId(req.params.id);
+//         const savedTutorials = await Creators.findAllSavedTutorials(req.params.user_id); 
+//         await savedTutorials.removeSavedTutorialbyId(req.params.user_id);
 
-      res.status(204).end();
-    } catch (err) {
-      res
-        .status(500)
-        .json({ message: "Something went wrong, could not delete saved tutorial from your favorite's list using that id" });
+//       res.status(204).end();
+//     } catch (err) {
+//       res
+//         .status(500)
+//         .json({ message: "Something went wrong, could not delete saved tutorial from your favorite's list using that id" });
 
-      next(err);
-    }
-  }
-);
+//       next(err);
+//     }
+//   }
+// );
 
 
 module.exports = router;
