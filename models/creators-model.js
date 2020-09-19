@@ -37,29 +37,29 @@ function remove(id) {
       .del();
 }
 
-// function findAllSavedTutorials(id) {
+// function findAllCreatedTutorials(id) {
 //     return db("creators")
 //         .select("id", "tutorials")
 // // }
-// function findAllSavedTutorials(creator_id) {
-//     return db("saved_creator_tutorials")
+// function findAllCreatedTutorials(creator_id) {
+//     return db("creator_tutorials")
 // 		.select("creator_id", "tutorials")
 // 		.where({ creator_id })
 // }
 
-// function findSavedTutorialById(creator_id) {
-//     return db("creators")
+// function findCreatedTutorialById(creator_id) {
+//     return db("creator_tutorials")
 // 		.select("id", "tutorials")
 // 		.where({ creator_id })
 // 		.first()
 // }
 
-// // function removeSavedTutorialById(id) {
+// // function removeCreatedTutorialById(id) {
 // // 	return db('creators')
 // // 	  .select("id", "tutorials")
 // // 	  .where({ id })
-// function removeSavedTutorialById(creator_id) {
-// 	return db("saved_creator_tutorials")
+// function removeCreatedTutorialById(creator_id) {
+// 	return db("creator_tutorials")
 // 	  .where({ creator_id })
 // 	  .del();
 // }
