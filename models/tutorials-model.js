@@ -17,7 +17,7 @@ function findBy(filter) {
 
 function findById(id) {
 	return db("tutorials")
-		.select("id", "title")
+		.select("id", "title", "materials", "directions", "likes", "is_saved")
 		.where({ id })
 		.first()
 }
