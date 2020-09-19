@@ -32,6 +32,28 @@ router.get("/:id", async (req, res, next) => {
 
 // edit and delete for the tutorial themselves should only be accessed by creator, you can only save or delete saved tutorials as a user
 
+router.put('/:id', async (req, res, next) => {
+    try {
+        const { id } = req.params;
+        const changes = req.body;
+        const tutorial = await Tutorials.findById(id); // if not account, send 404, otherwise send 200
+        if (tutorial) {
+            Tutorials.update(changes, id)
+            .then(updatedTutorial => {
+            res.status(200).json(updatedTutorial);
+            console.log("Tutorial uddated")
+            });
+        } else {
+            res.status(404).json({ message: 'Could not find tutorial with the given id' });
+        }
+      } catch (err) {
+        res
+          .status(500)
+          .json({ message: "Something went wrong, could not update tutorial" });
+        next(err);
+      }
+});
+
 router.delete("/:id", async (req, res, next) => {
   try {
     await Tutorials.remove(req.params.id);
