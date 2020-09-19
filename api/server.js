@@ -19,7 +19,7 @@ server.use(cookieParser());
 
 server.use('/api', authRouter);  
 server.use('/api', usersRouter);  
-// server.use('/api/creators', creatorsRouter); 
+// server.use('/api', creatorsRouter); 
 server.use('/api/tutorials', tutorialsRouter);  
 
 
