@@ -11,7 +11,6 @@ exports.up = async function (knex) {
           tbl.text("username").notNull().unique();
           tbl.text("password").notNull();
     });
-
     await knex.schema
       .createTable("tutorials", (tbl) => {
           tbl.increments("id");
