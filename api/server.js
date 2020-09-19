@@ -7,7 +7,7 @@ const cookieParser = require("cookie-parser")
 const authRouter = require('../routers/auth-router');
 const usersRouter = require('../routers/users-router');
 // const creatorsRouter = require('../routers/creators-router');
-const tutorialsRouter = require('../routers/tutorials-router');
+// const tutorialsRouter = require('../routers/tutorials-router');
 
 
 const server = express();
@@ -20,7 +20,7 @@ server.use(cookieParser());
 server.use('/api', authRouter);  
 server.use('/api', usersRouter);  
 // server.use('/api', creatorsRouter); 
-server.use('/api', tutorialsRouter);  
+// server.use('/api', tutorialsRouter);  
 
 
 server.get("/", (req, res) => {
