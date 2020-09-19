@@ -37,25 +37,32 @@ function remove(id) {
       .del();
 }
 
-function removeSavedTutorialById(user_id) {
-	return db("saved_user_tutorials")
-	  .where({ user_id })
-	  .del();
-  }
-
+// function findAllSavedTutorials(id) {
+//     return db("users")
+//         .select("id", "tutorials")
+// }
 function findAllSavedTutorials(user_id) {
     return db("saved_user_tutorials")
 		.select("user_id", "tutorials")
 		.where({ user_id })
 }
 
-function findSavedTutorialById(id) {
+function findSavedTutorialById(user_id) {
     return db("users")
 		.select("id", "tutorials")
-		.where({id})
+		.where({ user_id })
 		.first()
 }
 
+// function removeSavedTutorialById(id) {
+// 	return db('users')
+// 	  .select("id", "tutorials")
+// 	  .where({ id })
+function removeSavedTutorialById(user_id) {
+	return db("saved_user_tutorials")
+	  .where({ user_id })
+	  .del();
+}
 
 
 module.exports = {

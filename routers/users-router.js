@@ -95,6 +95,8 @@ router.delete("/users/:id", async (req, res, next) => {
 
 router.delete("/users/:id/tutorials/:id", async (req, res, next) => {
     try {
+      // const savedTutorials = await Users.findAllSavedTutorials(req.params.id); 
+      // await savedTutorials.removeSavedTutorialbyId(req.params.id);
         const savedTutorials = await Users.findAllSavedTutorials(req.params.user_id); 
         await savedTutorials.removeSavedTutorialbyId(req.params.user_id);
 
