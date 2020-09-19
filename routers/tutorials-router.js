@@ -6,7 +6,7 @@ const Tutorials = require("../models/tutorials-model");
 
 
 
-router.get("/tutorials", async (req, res, next) => {
+router.get("/", async (req, res, next) => {
   try {
     res.json(await Tutorials.find());
   } catch (err) {
@@ -14,7 +14,7 @@ router.get("/tutorials", async (req, res, next) => {
   }
 });
 
-router.get("/tutorials/:id", async (req, res, next) => {
+router.get("/:id", async (req, res, next) => {
   try {
     const tutorial = await Tutorials.findById(req.params.id); // if not account, send 404, otherwise send 200
     if (!tutorial) {
@@ -32,7 +32,7 @@ router.get("/tutorials/:id", async (req, res, next) => {
 
 // edit and delete for the tutorial themselves should only be accessed by creator, you can only save or delete saved tutorials as a user
 
-router.delete("/tutorials/:id", async (req, res, next) => {
+router.delete("/:id", async (req, res, next) => {
   try {
     await Tutorials.remove(req.params.id);
 
