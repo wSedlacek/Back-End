@@ -9,18 +9,18 @@ async function add(creator) {
 }
 
 function find() {
-	return db("creators").select("id", "creatorname")
+	return db("creators").select("id", "username")
 }
 
 function findBy(filter) {
 	return db("creators")
-		.select("id", "creatorname", "password")
+		.select("id", "username", "password")
 		.where(filter)
 }
 
 function findById(id) {
 	return db("creators")
-		.select("id", "creatorname")
+		.select("id", "username")
 		.where({ id })
 		.first()
 }
