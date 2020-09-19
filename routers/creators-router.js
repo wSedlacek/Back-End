@@ -79,7 +79,7 @@ router.get("/creators/:id/tutorials/:id", async (req, res, next) => {
 
 // edit and delete for the tutorial themselves should only be accessed by creators, you can only delete saved tutorials
 
-router.put("/creators/:id/tutorials/:id", authenticate(), async (req, res, next) => {
+router.put("/creators/:id/tutorials/:id", async (req, res, next) => {
     try {
       const changes = req.body;
   
