@@ -52,7 +52,7 @@ function findAllSavedTutorials(user_id) {
 function findSavedTutorialById(user_id) {
     return db("users")
 		.select("id", "tutorials")
-		.where({id})
+		.where({user_id})
 		.first()
 }
 
