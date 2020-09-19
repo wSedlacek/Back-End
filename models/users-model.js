@@ -37,16 +37,16 @@ function remove(id) {
       .del();
 }
 
-function removeSavedTutorialById(id) {
-	return db('users')
-	  .select("id", "tutorials", "id")
-	  .where({ id })
+function removeSavedTutorialById(user_id) {
+	return db("saved_user_tutorials")
+	  .where({ user_id })
 	  .del();
   }
 
-function findAllSavedTutorials(id) {
-    return db("users")
-        .select("id", "tutorials")
+function findAllSavedTutorials(user_id) {
+    return db("saved_user_tutorials")
+		.select("user_id", "tutorials")
+		.where({ user_id })
 }
 
 function findSavedTutorialById(id) {

@@ -1,71 +1,44 @@
-const bcrypt = require("bcryptjs");
 const db = require("../database/dbConfig")
 
-async function add(user) {
-	user.password = await bcrypt.hash(user.password, 13);
-
-	const [id] = await db("users").insert(user);
+async function add(tutorial) {
+	const [id] = await db("tutorials").insert(tutorial);
 	return findById(id);
 }
 
 function find() {
-	return db("users").select("id", "username")
+	return db("tutorials").select("id", "title", "materials", "directions", "likes", "is_saved")
 }
 
 function findBy(filter) {
-	return db("users")
-		.select("id", "username", "password")
+	return db("tutorials")
+		.select("id", "title", "materials", "directions", "likes", "is_saved")
 		.where(filter)
 }
 
 function findById(id) {
-	return db("users")
-		.select("id", "username")
+	return db("tutorials")
+		.select("id", "title")
 		.where({ id })
 		.first()
 }
 
 function update(id, changes) {
-    return db('users')
+    return db('tutorials')
       .where({ id })
       .update(changes, '*');
 } 
 
 function remove(id) {
-    return db('users')
+    return db('tutorials')
       .where({ id })
       .del();
 }
-
-function removeSavedTutorialById(id) {
-	return db('users')
-	  .select("id", "tutorials", "id")
-	  .where({ id })
-	  .del();
-  }
-
-function findAllSavedTutorials(id) {
-    return db("users")
-        .select("id", "tutorials")
-}
-
-function findSavedTutorialById(id) {
-    return db("users")
-		.select("id", "tutorials")
-		.where({id})
-		.first()
-}
-
-
 
 module.exports = {
 	add,
 	find,
 	findBy,
 	findById,
-	findAllSavedTutorials,
-	findSavedTutorialById,
     update,
 	remove,
-	removeSavedTutorialById
 }
