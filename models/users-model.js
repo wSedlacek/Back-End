@@ -49,7 +49,7 @@ function findAllSavedTutorials(user_id) {
 		.where({ user_id })
 }
 
-function findSavedTutorialById(id) {
+function findSavedTutorialById(user_id) {
     return db("users")
 		.select("id", "tutorials")
 		.where({id})
