@@ -16,7 +16,7 @@ router.get("/tutorials", async (req, res, next) => {
 
 router.get("/tutorials/:id", async (req, res, next) => {
   try {
-    const id = req.params.id;
+    const {id} = req.params;
     const tutorial = await Tutorials.findById(id); // if not account, send 404, otherwise send 200
     if (!tutorial) {
       res.status(404).json({ message: "Tutorial could not be found with that ID" });
