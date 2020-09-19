@@ -1,24 +1,133 @@
 
-// router.put("/users/:id/tutorials/:id", authenticate(), async (req, res, next) => {
-//     try {
-//       const changes = {
-//         vin: req.body.vin,
-//         model: req.body.model,
-//         make: req.body.make,
-//         mileage: req.body.mileage,
-//         transType: req.body.transType,
-//         titleStatus: req.body.titleStatus,
-//       };
+require("dotenv").config(); // for reading JWT_SECRET from .env file
+const express = require("express");
+const router = express.Router();
+// const authenticate = require("../middleware/git auth-middleware");
+const Creators = require("../models/creators-model");
+
+
+
+router.get("/creators", async (req, res, next) => {
+  try {
+    res.json(await Creators.find());
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.get("/creators/:id", async (req, res, next) => {
+  try {
+    const user = await Creators.findById(req.params.id); // if not account, send 404, otherwise send 200
+    if (!user) {
+      res.status(404).json({ message: "User could not be found with that ID" });
+    } else {
+      res.status(200).json(user);
+    }
+  } catch (err) {
+    res
+      .status(500)
+      .json({ message: "Something went wrong, could not find user by ID" });
+    next(err);
+  }
+});
+
+router.get("/creators/:id/tutorials", async (req, res, next) => {
+  try {
+    const savedTutorials = await Creators.findAllSavedTutorials(req.params.id); // if not account, send 404, otherwise send 200
+    if (!savedTutorials) {
+      res
+        .status(404)
+        .json({ message: "User does not have any tutorials saved." });
+    } else {
+      res.status(200).json(savedTutorials);
+    }
+  } catch (err) {
+    res
+      .status(500)
+      .json({
+        message:
+          "Something went wrong, could not find tutorials under/made by this user.",
+      });
+    next(err);
+  }
+});
+
+router.get("/creators/:id/tutorials/:id", async (req, res, next) => {
+    try {
+      const savedTutorial = await Creators.findSavedTutorialById(req.params.id); // if not account, send 404, otherwise send 200
+      if (!savedTutorial) {
+        res
+          .status(404)
+          .json({
+            message:
+              "A specific saved tutorial could not be found with that ID",
+          });
+      } else {
+        res.status(200).json(savedTutorial);
+      }
+    } catch (err) {
+      res
+        .status(500)
+        .json({
+          message:
+            "Something went wrong, could not find a specific tutorial saved to user by ID",
+        });
+      next(err);
+    }
+  }
+);
+
+// edit and delete for the tutorial themselves should only be accessed by creators, you can only delete saved tutorials
+
+router.put("/creators/:id/tutorials/:id", authenticate(), async (req, res, next) => {
+    try {
+      const changes = req.body;
   
-//       console.log("this is on the id: ", req.params.id);
+      console.log("this is the tutorial on the id: ", req.params.id);
   
-//       const updatedCar = await db.update(req.params.id, changes);
+      const updatedCreatorTutorial = await Creators.update(req.params.id, changes);
   
-//       res.status(204).json(updatedCar);
-//     } catch (err) {
-//       res
-//         .status(500)
-//         .json({ message: "Something went wrong, could not update car" });
-//       next(err);
-//     }
-//   });
+      res.status(204).json(updatedCreatorTutorial);
+    } catch (err) {
+      res
+        .status(500)
+        .json({ message: "Something went wrong, could not update creator's tutorial" });
+      next(err);
+    }
+  });
+
+
+router.delete("/creators/:id", async (req, res, next) => {
+  try {
+    await Creators.remove(req.params.id);
+
+    res.status(204).end();
+  } catch (err) {
+    res
+      .status(500)
+      .json({ message: "Something went wrong, could not delete user by that ID" });
+
+    next(err);
+  }
+});
+
+router.delete("/creators/:id/tutorials/:id", async (req, res, next) => {
+    try {
+      // const savedTutorials = await Creators.findAllSavedTutorials(req.params.id); 
+      // await savedTutorials.removeSavedTutorialbyId(req.params.id);
+        const savedTutorials = await Creators.findAllSavedTutorials(req.params.user_id); 
+        await savedTutorials.removeSavedTutorialbyId(req.params.user_id);
+
+      res.status(204).end();
+    } catch (err) {
+      res
+        .status(500)
+        .json({ message: "Something went wrong, could not delete saved tutorial from your favorite's list using that id" });
+
+      next(err);
+    }
+  }
+);
+
+
+module.exports = router;
