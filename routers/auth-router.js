@@ -3,6 +3,7 @@ const express = require("express");
 const bcrypt = require("bcryptjs");
 const jwt = require('jsonwebtoken')
 const Users = require("../models/users-model");
+const secrets = require("../api/config/secrets");
 
 const router = express.Router();
 
@@ -45,6 +46,7 @@ router.post("/register", async (req, res, next) => {
   
       res.status(200).json({
         message: `Welcome ${user.username}!`,
+        token,
       });
     } catch (err) {
       next(err);
@@ -56,8 +58,11 @@ router.post("/register", async (req, res, next) => {
         subject: user.id,
         username: user.username,
         // do not put passwords into token payloads
-      }
-      return jwt.sign(payload, process.env.JWT_SECRET) // 3rd parameter is option
+      };
+      const options = {
+        expiresIn: '8h',
+      };
+      return jwt.sign(payload, secrets.jwtSecret, options) // 3rd parameter is option
     }
 
   // router.get("/logout", async (req, res, next) => {
