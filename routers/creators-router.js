@@ -19,7 +19,7 @@ router.get("/creators/:id", async (req, res, next) => {
   try {
     const user = await Creators.findById(req.params.id); // if not account, send 404, otherwise send 200
     if (!user) {
-      res.status(404).json({ message: "User could not be found with that ID" });
+      res.status(404).json({ message: "Creator could not be found with that ID" });
     } else {
       res.status(200).json(user);
     }
@@ -33,13 +33,14 @@ router.get("/creators/:id", async (req, res, next) => {
 
 router.get("/creators/:id/tutorials", async (req, res, next) => {
   try {
-    const savedTutorials = await Creators.findAllSavedTutorials(req.params.id); // if not account, send 404, otherwise send 200
-    if (!savedTutorials) {
+    const creatorId = req.params.id;
+    const createdTutorials = await Creators.findAllCreatedTutorials(creatorId); // if not account, send 404, otherwise send 200
+    if (!createdTutorials) {
       res
         .status(404)
-        .json({ message: "User does not have any tutorials saved." });
+        .json({ message: "Creator does not have any original tutorials saved to database." });
     } else {
-      res.status(200).json(savedTutorials);
+      res.status(200).json(createdTutorials);
     }
   } catch (err) {
     res
@@ -52,30 +53,31 @@ router.get("/creators/:id/tutorials", async (req, res, next) => {
   }
 });
 
-router.get("/creators/:id/tutorials/:id", async (req, res, next) => {
-    try {
-      const savedTutorial = await Creators.findSavedTutorialById(req.params.id); // if not account, send 404, otherwise send 200
-      if (!savedTutorial) {
-        res
-          .status(404)
-          .json({
-            message:
-              "A specific saved tutorial could not be found with that ID",
-          });
-      } else {
-        res.status(200).json(savedTutorial);
-      }
-    } catch (err) {
-      res
-        .status(500)
-        .json({
-          message:
-            "Something went wrong, could not find a specific tutorial saved to user by ID",
-        });
-      next(err);
-    }
-  }
-);
+// router.get("/creators/:id/tutorials/:id", async (req, res, next) => {
+//     try {
+//       const creatorId = req.params.id;
+//       const createdTutorial = await Creators.findCreatedTutorialById(creatorId); // if not account, send 404, otherwise send 200
+//       if (!createdTutorial) {
+//         res
+//           .status(404)
+//           .json({
+//             message:
+//               "A specific created tutorial could not be found with that ID",
+//           });
+//       } else {
+//         res.status(200).json(createdTutorial);
+//       }
+//     } catch (err) {
+//       res
+//         .status(500)
+//         .json({
+//           message:
+//             "Something went wrong, could not find a specific tutorial made by creator using that tutorial ID",
+//         });
+//       next(err);
+//     }
+//   }
+// );
 
 // edit and delete for the tutorial themselves should only be accessed by creators, you can only delete saved tutorials
 
