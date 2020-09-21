@@ -31,21 +31,19 @@ router.post("/register", async (req, res, next) => {
     try {
       const { username, password } = req.body;
       const user = await Users.findBy({ username }).first();
-      if (!user) {
-        return res.status(401).json(authErr);
-      }
+        if (!user) {
+          return res.status(401).json(authErr);
+        }
       
-      // compares plain text pw from req body to the hash stored in the db, returns true/false
       const passwordValid = await bcrypt.compare(password, user.password);
-      if (!passwordValid) {
-        return res.status(401).json(authErr);
-      }
+        if (!passwordValid) {
+          return res.status(401).json(authErr);
+        }
   
-      // generate a new JSON web token
       const token = generateToken(user)
       res.cookie('token', token)
   
-      res.json({
+      res.status(200).json({
         message: `Welcome ${user.username}!`,
       });
     } catch (err) {
@@ -55,11 +53,11 @@ router.post("/register", async (req, res, next) => {
   
   function generateToken(user) {
       const payload = {
-      //   id: user.id,
+        subject: user.id,
         username: user.username,
-        password: user.password
+        // do not put passwords into token payloads
       }
-      return jwt.sign(payload, process.env.JWT_SECRET)
+      return jwt.sign(payload, process.env.JWT_SECRET) // 3rd parameter is option
     }
 
   // router.get("/logout", async (req, res, next) => {
