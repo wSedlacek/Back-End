@@ -37,10 +37,10 @@ function remove(id) {
       .del();
 }
 
-// function findAllCreatedTutorials(id) {
-//     return db("creators")
-//         .select("id", "tutorials")
-// // }
+// // function findAllCreatedTutorials(id) {
+// //     return db("creators")
+// //         .select("id", "tutorials")
+// // // }
 // function findAllCreatedTutorials(creator_id) {
 //     return db("creator_tutorials")
 // 		.select("creator_id", "tutorials")
@@ -49,7 +49,7 @@ function remove(id) {
 
 // function findCreatedTutorialById(creator_id) {
 //     return db("creator_tutorials")
-// 		.select("id", "tutorials")
+// 		.select("creator_id", "tutorials")
 // 		.where({ creator_id })
 // 		.first()
 // }
@@ -70,9 +70,9 @@ module.exports = {
 	find,
 	findBy,
 	findById,
-	// findAllSavedTutorials,
-	// findSavedTutorialById,
+	// findAllCreatedTutorials,
+	// findCreatedTutorialById,
     update,
 	remove,
-	// removeSavedTutorialById
+	// removeCreatedTutorialById
 }
