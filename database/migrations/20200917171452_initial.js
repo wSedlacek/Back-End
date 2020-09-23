@@ -57,8 +57,37 @@ exports.up = async function (knex) {
           tbl.primary(['user_id','tutorial_id'])
     }); 
 
+    await knex.schema
+      .createTable("creator_tutorials", (tbl) => {
+        // tbl.increments("id");
+        tbl.text("title").notNull();
+        tbl.text("materials").notNull();
+        tbl.text("directions").notNull();
+        tbl.integer("likes");
+        tbl.boolean("is_saved").notNull().defaultTo(false);
+      
+          tbl.integer("creator_id")
+          .references("id")
+          .inTable("creators")
+                .unsigned()
+                .notNull()
+                .onUpdate("CASCADE")
+                .onDelete("CASCADE");
+
+          tbl.integer("tutorial_id")
+          .references("id")              
+          .inTable("tutorials")
+                .notNull()
+                .unsigned()
+                .onUpdate("CASCADE")
+                .onDelete("CASCADE");
+
+          tbl.primary(['creator_id','tutorial_id'])
+    }); 
+
  };
   exports.down = async function(knex) {
+    await knex.schema.dropTableIfExists("creator_tutorials");
     await knex.schema.dropTableIfExists("saved_user_tutorials");
     await knex.schema.dropTableIfExists("tutorials");
     await knex.schema.dropTableIfExists("creators");

@@ -1,7 +1,7 @@
 require("dotenv").config(); // for reading JWT_SECRET from .env file
 const express = require("express");
 const router = express.Router();
-// const authenticate = require("../middleware/auth-middleware");
+const authenticate = require("../middleware/auth-middleware"); // call with function
 const Tutorials = require("../models/tutorials-model");
 
 
@@ -33,11 +33,14 @@ router.get("/tutorials/:id", async (req, res, next) => {
 
 // edit and delete for the tutorial themselves should only be accessed by creator, you can only save or delete saved tutorials as a user
 
-router.put('/tutorials/:id', async (req, res, next) => {
+router.put('/tutorials/:id', authenticate(), async (req, res, next) => {
     try {
         const { id } = req.params;
         const changes = req.body;
-        const tutorial = await Tutorials.findById(id); // if not account, send 404, otherwise send 200
+        const tutorial = await Tutorials.findById(id); // if not account, send 404, otherwise send 200]
+        // if (tutorial.creator_id != req.token.subject) {} else {} // for auth
+
+
         if (tutorial) {
             Tutorials.update(changes, id)
             .then(updatedTutorial => {
