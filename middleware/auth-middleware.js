@@ -3,28 +3,11 @@ const jwt = require("jsonwebtoken")
 
 
 
-const authenticateJWT = (req, res, next) => {
-    const authHeader = req.headers.authorization;
-
-    if (authHeader) {
-        const token = authHeader.split(' ')[1];
-
-        jwt.verify(token, accessTokenSecret, (err, user) => {
-            if (err) {
-                return res.sendStatus(403);
-            }
-
-            req.user = user;
-            next();
-        });
-    } else {
-        res.sendStatus(401);
-    }
-};
-
 function authenticate(role) {
 	// use a scale, since admins should still be able to access basic endpoints
-	// const roles = ["user", "creator"]
+	const roles = ["user", "creator"]
+
+	// users can save a tutorial or delete it from dashboard, but cannot directly edit or delete a tutorial. Only a creator has access to delete, add, and edit a tutorial from the database. 
 
 	return async (req, res, next) => {
 		const authError = {
@@ -45,11 +28,11 @@ function authenticate(role) {
 				}
 
 				// // make sure the user's role is above or the same as the required role
-				// if (role && roles.indexOf(decoded.userRole) < roles.indexOf(role)) {
-				// 	return res.status(403).json({
-				// 		message: "You are not allowed to create tutorials",
-				// 	})
-				// }
+				if (role && roles.indexOf(decoded.userRole) < roles.indexOf(role)) {
+					return res.status(403).json({
+						message: "You are not allowed to create tutorials",
+					})
+				}
 
 				// we know the user is authorized at this point,
 				// make the token's payload available to other middleware functions

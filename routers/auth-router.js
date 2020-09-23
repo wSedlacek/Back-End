@@ -57,6 +57,7 @@ router.post("/register", async (req, res, next) => {
       const payload = {
         subject: user.id,
         username: user.username,
+        role: user.role,
         // do not put passwords into token payloads
       };
       const options = {

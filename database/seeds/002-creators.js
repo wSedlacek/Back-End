@@ -31,17 +31,21 @@ exports.seed = async function (knex, Promise) {
     {
       id: 1,
       username: 'testcreator',
-      password: 'abc123'
+      password: 'abc123',
+      // role: 'creator'
     },
     {
       id: 2,
       username: 'testcreator2',
-      password: 'abc123'
+      password: 'abc123',
+      // role: 'creator'
+
     },
     {
       id: 3,
       username: 'Blobcreator',
-      password: 'abc123'
+      password: 'abc123',
+      // role: 'creator'
     }
   ]);
 };
