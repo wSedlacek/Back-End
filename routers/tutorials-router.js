@@ -66,7 +66,7 @@ router.delete("/tutorials/:id", async (req, res, next) => {
   } catch (err) {
     res
       .status(500)
-      .json({ message: "Something went wrong, could not delete user by that ID" });
+      .json({ message: "Something went wrong, could not delete tutorial by that ID" });
 
     next(err);
   }
