@@ -1,19 +1,26 @@
 const jwt = require("jsonwebtoken")
+// authenticate vs authorize, is = who are you vs. do you have clearance?
 
-// function authenticate(req, res, next) {
-//     // Gather the jwt access token from the request header
-//     const authHeader = req.headers['authorization']
-//     const token = authHeader && authHeader.split(' ')[1]
-//     if (token == null) return res.sendStatus(401) // if there isn't any token
-  
-//     jwt.verify(token, process.env.JWT_SECRET as string, (err: any, user: any) => {
-//       console.log(err)
-//       if (err) return res.sendStatus(403)
-//       req.user = user
-//       next() // pass the execution off to whatever request the client intended
-//     })
-// }
 
+
+const authenticateJWT = (req, res, next) => {
+    const authHeader = req.headers.authorization;
+
+    if (authHeader) {
+        const token = authHeader.split(' ')[1];
+
+        jwt.verify(token, accessTokenSecret, (err, user) => {
+            if (err) {
+                return res.sendStatus(403);
+            }
+
+            req.user = user;
+            next();
+        });
+    } else {
+        res.sendStatus(401);
+    }
+};
 
 function authenticate(role) {
 	// use a scale, since admins should still be able to access basic endpoints

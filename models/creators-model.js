@@ -41,11 +41,11 @@ function remove(id) {
 // //     return db("creators")
 // //         .select("id", "tutorials")
 // // // }
-// function findAllCreatedTutorials(creator_id) {
-//     return db("creator_tutorials")
-// 		.select("creator_id", "tutorials")
-// 		.where({ creator_id })
-// }
+function findAllCreatedTutorials(creator_id) {
+    return db("creator_tutorials")
+		.select("creator_id", "tutorials")
+		.where({ creator_id })
+}
 
 // function findCreatedTutorialById(creator_id) {
 //     return db("creator_tutorials")
@@ -70,7 +70,7 @@ module.exports = {
 	find,
 	findBy,
 	findById,
-	// findAllCreatedTutorials,
+	findAllCreatedTutorials,
 	// findCreatedTutorialById,
     update,
 	remove,

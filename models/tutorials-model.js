@@ -11,13 +11,13 @@ function find() {
 
 function findBy(filter) {
 	return db("tutorials")
-		.select("id", "title", "materials", "directions", "likes", "is_saved")
+		.select("id", "title", "materials", "directions", "likes", "is_saved", "creator_id")
 		.where(filter)
 }
 
 function findById(id) {
 	return db("tutorials")
-		.select("id", "title", "materials", "directions", "likes", "is_saved")
+		.select("id", "title", "materials", "directions", "likes", "is_saved", "creator_id")
 		.where({ id })
 		.first()
 }

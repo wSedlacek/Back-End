@@ -47,7 +47,7 @@ router.get("/creators/:id/tutorials", async (req, res, next) => {
       .status(500)
       .json({
         message:
-          "Something went wrong, could not find tutorials under/made by this user.",
+          "Something went wrong, could not find tutorials under/made by this creator account.",
       });
     next(err);
   }
