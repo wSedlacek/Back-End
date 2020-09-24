@@ -6,7 +6,7 @@ async function add(tutorial) {
 }
 
 function find() {
-	return db("tutorials").select("id", "title", "materials", "directions", "likes", "is_saved")
+	return db("tutorials").select("id", "title", "materials", "directions", "likes", "is_saved", "creator_id")
 }
 
 function findBy(filter) {
