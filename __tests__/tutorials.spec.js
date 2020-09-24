@@ -31,3 +31,17 @@ describe("jokes integration tests", () => {
         })
     });
   })
+
+  it("tests the post new movies endpoint and returns as success message", async () => {
+
+    const response = await supertest(app).post('/movies').send({
+        title: 'New Movie',
+        synopsis: 'Synopsis of the new movie',
+        rating: 'PG'
+    });
+
+    expect(response.status).toBe(200);
+    expect(response.body.status).toBe('success');
+    expect(response.body.message).toBe('Movies Saved Successfully.');
+
+});

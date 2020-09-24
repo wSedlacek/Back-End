@@ -42,7 +42,10 @@ router.post("/register", async (req, res, next) => {
         }
   
       const token = generateToken(user)
-      res.cookie('token', token)
+      res.cookie('token', token, { 
+        httpOnly: true, 
+        sameSite: process.env.DB_ENV ==="production" ? "none" : "lax", 
+        secure: process.env.DB_ENV ==="production"}) // configuration for cors
   
       res.status(200).json({
         message: `Welcome ${user.username}!`,
@@ -65,7 +68,7 @@ router.post("/register", async (req, res, next) => {
       };
       return jwt.sign(payload, secrets.jwtSecret, options) // 3rd parameter is option
     }
-
+ // can also send as a token in the response and set with axioswithauth
   // router.get("/logout", async (req, res, next) => {
   //   req.session.destroy(err => {
   //   	if (err) {
