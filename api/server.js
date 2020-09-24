@@ -13,7 +13,10 @@ const tutorialsRouter = require('../routers/tutorials-router');
 const server = express();
 
 server.use(helmet());
-server.use(cors());
+server.use(cors({
+	credentials: true,
+	origin: ["http://localhost:3000", "http://localhost:3001", "https://how-to-1.netlify.app/"],
+})); // configuration 
 server.use(express.json());
 server.use(cookieParser());
 
