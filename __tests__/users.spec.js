@@ -14,43 +14,25 @@ afterAll(async () => {
   await db.destroy();
 });
 
-describe("GET /", () => {
-	it('should GET /', async () => {
-		const res = await request(server).get('/')
-		expect(res.statusCode).toBe(200)
-		expect(res.headers['content-type']).toBe('application/json; charset=utf-8')
-	})
-})
 
-describe("Users route", () => {
-	it('should test users login process', async () => {
-		const fakeServer = request(server);
-		await fakeServer
-			.post("/api/auth/login")
-			.send({ username: "testUser6", password: "abc123" });
-		const res = await fakeServer.get("/api/users");
-		expect(res.statusCode).toBe(200);
-		expect(res.type).toBe("application/json");
-	});
-});
 
-describe("users integration tests", () => {
-	it('should /GET /api/users', async () => {
-	  const fakeServer = request(server);
-	  const res = await fakeServer.get('/api/users')
-	  expect(res.statusCode).toBe(200)
-	  expect(res.headers['content-type']).toBe('application/json; charset=utf-8')
-	}); // how to refactor for varying cases of being logged in or not?
-	it('should return a JSON object', () => {
-		return request(server).get('/api/users/')
-		.then(jokes => {
-			expect(jokes.type).toEqual("application/json")
-		})
-	});
-	it('should return a 200 status code if logged in', () => {
-        return request(server).get('/api/users')
-        .then(user => {
-            expect(user.status).toEqual(200)
-        })
-    });
-  })
+// describe("users integration tests", () => {
+// 	it('should /GET /api/users', async () => {
+// 	  const fakeServer = request(server);
+// 	  const res = await fakeServer.get('/api/users')
+// 	  expect(res.statusCode).toBe(200)
+// 	  expect(res.headers['content-type']).toBe('application/json; charset=utf-8')
+// 	}); // how to refactor for varying cases of being logged in or not?
+// 	it('should return a JSON object', () => {
+// 		return request(server).get('/api/users/')
+// 		.then(jokes => {
+// 			expect(jokes.type).toEqual("application/json")
+// 		})
+// 	});
+// 	it('should return a 200 status code if logged in', () => {
+//         return request(server).get('/api/users')
+//         .then(user => {
+//             expect(user.status).toEqual(200)
+//         })
+//     });
+//   })
