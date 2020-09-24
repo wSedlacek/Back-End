@@ -5,6 +5,24 @@ const authenticate = require("../middleware/auth-middleware"); // call with func
 const Tutorials = require("../models/tutorials-model");
 
 
+router.post("/tutorials", async (req, res, next) => {
+  try {
+    const newTutorialInput = req.body;
+
+    if (newTutorialInput) {
+      Tutorials.add(newTutorialInput)
+      .then(createdTutorial => {
+      res.status(201).json(createdTutorial);
+      console.log("Tutorial created", createdTutorial)
+      });
+    } else {
+      res.status(400).json({ message: 'Could not create tutorial with the input provided, possibly missing information' });
+     }
+  } catch (err) {
+    next(err);
+  }
+});
+
 
 router.get("/tutorials", async (req, res, next) => {
   try {
@@ -66,7 +84,7 @@ router.delete("/tutorials/:id", async (req, res, next) => {
   } catch (err) {
     res
       .status(500)
-      .json({ message: "Something went wrong, could not delete user by that ID" });
+      .json({ message: "Something went wrong, could not delete tutorial by that ID" });
 
     next(err);
   }
