@@ -15,7 +15,7 @@ const server = express();
 server.use(helmet());
 server.use(cors({
 	credentials: true,
-	origin: ["http://localhost:3000", "http://localhost:3001", "https://how-to-1.netlify.app/"],
+	origin: ["http://localhost:3000", "http://localhost:3001", "https://how-to-app-backend-api-herokuapp.com", "https://how-to-1.netlify.app/"],
 })); // configuration 
 
 server.use(function(req, res, next) {
