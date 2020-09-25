@@ -1,7 +1,7 @@
 const db = require("../database/dbConfig")
 
 async function add(tutorial) {
-	const [id] = await db("tutorials").insert(tutorial);
+	const [id] = await db("tutorials").insert(tutorial, "id");
 	return findById(id);
 }
 
