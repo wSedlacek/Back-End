@@ -14,9 +14,11 @@ const server = express();
 
 server.use(helmet());
 server.use(cors({
-	credentials: true,
-	origin: ["http://localhost:3000", "http://localhost:3001", "https://how-to-app-backend-api-herokuapp.com", "https://how-to-1.netlify.app/", "https://cdpn.io"],
+  credentials: true,
+  origin: ["https://cdpn.io", "http://localhost:3000", "http://localhost:3001", "https://how-to-1.netlify.app/"],
 }));
+
+
 
 server.use(express.json());
 server.use(cookieParser());
