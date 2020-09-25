@@ -18,11 +18,11 @@ server.use(cors({
 	origin: ["http://localhost:3000", "http://localhost:3001", "https://how-to-app-backend-api-herokuapp.com", "https://how-to-1.netlify.app/"],
 })); // configuration 
 
-server.use(function(req, res, next) {
-	res.header('Access-Control-Allow-Origin', '*');
-	res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-	next();
-});
+// server.use(function(req, res, next) {
+// 	res.header('Access-Control-Allow-Origin', '*');
+// 	res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+// 	next();
+// });
 // server.UseHttpsRedirection();
 // server.UseMvc();
 
